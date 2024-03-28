@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3308
--- Tempo de geração: 28-Mar-2024 às 00:56
+-- Tempo de geração: 28-Mar-2024 às 01:15
 -- Versão do servidor: 10.6.5-MariaDB
 -- versão do PHP: 7.4.26
 
@@ -35,7 +35,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `atualizaTime` (IN `timeA` VARCHAR(1
         qtdjogos = qtdjogos + 1
         	WHERE time.nome LIKE timeA;
             UPDATE time
-            set saldogol = saldogol - (golsA - golsB)
+            set saldogol = saldogol - (golsA - golsB),
+            qtdjogos = qtdjogos + 1
             WHERE time.nome LIKE timeB;
         ELSEIF(golsA < golsB) THEN
         UPDATE time
@@ -45,7 +46,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `atualizaTime` (IN `timeA` VARCHAR(1
            	qtdjogos = qtdjogos + 1
         		WHERE time.nome LIKE timeB;
                 UPDATE time
-            set saldogol = saldogol - (golsB - golsA)
+            set saldogol = saldogol - (golsB - golsA),
+            qtdjogos = qtdjogos + 1
             WHERE time.nome LIKE timeA;
                 ELSE             
                 	UPDATE time
